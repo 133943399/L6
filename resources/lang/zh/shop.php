@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'label' => '店铺',
+    'label' => '客户',
     'name' => '名称',
     'addr'  => '地址',
     'telephone'  => '电话',
