@@ -100,13 +100,13 @@ class Shop extends Resource
 
     public function orderFields(){
         return [
-            BelongsTo::make(__('order.label'), 'Order', Order::class)->searchable()
+            HasMany::make(__('order.label'), 'Order', Order::class)
         ];
     }
 
     public function paymentFields(){
         return [
-            BelongsTo::make(__('payment.label'), 'Payment', Payment::class)->searchable()
+            HasMany::make(__('payment.label'), 'Payment', Payment::class)
         ];
     }
 
