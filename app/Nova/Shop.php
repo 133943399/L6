@@ -74,8 +74,8 @@ class Shop extends Resource
                 ->sortable()
                 ->rules('required', 'max:255'),
 
-            Text::make(__('shop.contact_name'),'contact_name')
-                ->sortable(),
+//            Text::make(__('shop.contact_name'),'contact_name')
+//                ->sortable(),
 
             Text::make(__('shop.telephone'),'telephone')
                 ->sortable()
