@@ -34,6 +34,8 @@ class Shop extends Resource
      */
     public static $search = [
         'name',
+        'contact_name',
+        'telephone',
         'addr',
     ];
 
