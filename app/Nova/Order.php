@@ -60,7 +60,7 @@ class Order extends Resource
 
             BelongsTo::make('配送->'.__('shop.label'), 'Shop', Shop::class)->searchable(),
 
-            BelongsTo::make(__('product.label'), 'Product', Product::class)->searchable(),
+            BelongsTo::make(__('product.label'), 'Product', Product::class),
 
             Number::make(__('order.price'),'price')->step(0.01),
 
