@@ -33,7 +33,8 @@ class Shop extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'name',
+        'addr',
     ];
 
     /**
