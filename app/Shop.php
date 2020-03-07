@@ -9,11 +9,11 @@ class Shop extends Model
     //
     public function order()
     {
-        return $this->hasMany('App\Order');
+        return $this->belongsTo('App\Order');
     }
 
     public function payment()
     {
-        return $this->hasMany('App\Payment');
+        return $this->belongsTo('App\Payment');
     }
 }

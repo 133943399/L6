@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Nova\Lenses\ShopMTotal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -99,13 +100,13 @@ class Shop extends Resource
 
     public function orderFields(){
         return [
-            HasMany::make(__('order.label'), 'Order', Order::class)
+            BelongsTo::make(__('order.label'), 'Order', Order::class)->searchable()
         ];
     }
 
     public function paymentFields(){
         return [
-            HasMany::make(__('payment.label'), 'Payment', Payment::class)
+            BelongsTo::make(__('payment.label'), 'Payment', Payment::class)->searchable()
         ];
     }
 

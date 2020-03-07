@@ -58,9 +58,9 @@ class Order extends Resource
         return [
             ID::make()->sortable(),
 
-            BelongsTo::make('配送->'.__('shop.label'), 'Shop', Shop::class),
+            BelongsTo::make('配送->'.__('shop.label'), 'Shop', Shop::class)->searchable(),
 
-            BelongsTo::make(__('product.label'), 'Product', Product::class),
+            BelongsTo::make(__('product.label'), 'Product', Product::class)->searchable(),
 
             Number::make(__('order.price'),'price')->step(0.01),
 
