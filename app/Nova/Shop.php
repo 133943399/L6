@@ -70,6 +70,10 @@ class Shop extends Resource
         return [
             ID::make()->sortable(),
 
+            Text::make(__('shop.addr'),'addr')
+                ->sortable()
+                ->rules('required', 'max:255'),
+
             Text::make(__('shop.name'),'name')
                 ->sortable()
                 ->rules('required', 'max:255'),
@@ -78,10 +82,6 @@ class Shop extends Resource
 //                ->sortable(),
 
             Text::make(__('shop.telephone'),'telephone')
-                ->sortable()
-                ->rules('required', 'max:255'),
-
-            Text::make(__('shop.addr'),'addr')
                 ->sortable()
                 ->rules('required', 'max:255'),
 
