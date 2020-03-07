@@ -71,10 +71,6 @@ class Product extends Resource
 
             Number::make(__('product.price'),'price')->step(0.01),
 
-            Date::make(__('product.mfgDate'),'mfgDate'),
-
-            Date::make(__('product.expDate'),'expDate'),
-
             Boolean::make(__('product.status'),'status'),
 
             Text::make(__('product.remark'),'remark')
