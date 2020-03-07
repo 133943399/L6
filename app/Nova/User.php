@@ -41,7 +41,7 @@ class User extends Resource
      */
     public static function label()
     {
-        return __('User.label');
+        return __('user.label');
     }
 
     /**
