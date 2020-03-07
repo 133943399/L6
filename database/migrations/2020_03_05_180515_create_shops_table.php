@@ -18,7 +18,6 @@ class CreateShopsTable extends Migration
             $table->string('name')->comment('商店名称');
             $table->string('addr')->comment('商店地址');
             $table->string('telephone')->comment('电话号码');
-            $table->string('contact_name')->comment('联系人');
             $table->string('remark')->nullable()->comment('备注');
             $table->timestamps();
         });
