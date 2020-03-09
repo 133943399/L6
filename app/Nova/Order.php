@@ -3,6 +3,8 @@
 namespace App\Nova;
 
 use App\Nova\Lenses\OrderMTotal;
+use App\Nova\Metrics\OrderPerDay;
+use App\Nova\Metrics\OrdersPerPlan;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Date;
@@ -87,7 +89,10 @@ class Order extends Resource
      */
     public function cards(Request $request)
     {
-        return [];
+        return [
+            new OrderPerDay(),
+            new OrdersPerPlan(),
+        ];
     }
 
     /**
