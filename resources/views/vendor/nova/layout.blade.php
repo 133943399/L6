@@ -94,5 +94,11 @@
     <script>
         Nova.liftOff()
     </script>
+
+    <script src="https://npmcdn.com/flatpickr@4.5.2/dist/l10n/zh.js"></script>
+    <script>
+        flatpickr.localize(flatpickr.l10ns.zh)
+        flatpickr('.flatpickr-input')
+    </script>
 </body>
 </html>
