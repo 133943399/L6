@@ -19,25 +19,25 @@ class PaymentPolicy
         //
     }
 
-    public function before($user, $ability)
+
+    public function viewAny(User $user)
     {
         return true;
     }
 
-    public function viewAny(User $user)
-    {
-    }
-
     public function view(User $user)
     {
+        return true;
     }
 
     public function create(User $user)
     {
+        return true;
     }
 
     public function update(User $user)
     {
+        return true;
     }
 
     public function delete(User $user)
