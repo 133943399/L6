@@ -56,7 +56,7 @@ class Payment extends Resource
         return [
             ID::make()->sortable(),
 
-            BelongsTo::make(__('shop.label'), 'Shop', Shop::class),
+            BelongsTo::make(__('shop.label'), 'Shop', Shop::class)->searchable(),
 
             Number::make(__('payment.amount'),'amount')->step(0.01)->rules('required'),
 
