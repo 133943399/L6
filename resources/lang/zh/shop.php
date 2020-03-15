@@ -10,4 +10,5 @@ return [
     'total_price'  => '订单总金额',
     'total_amount' => '总付款',
     'unpaid' => '未付款',
+    'date' => '日期',
 ];

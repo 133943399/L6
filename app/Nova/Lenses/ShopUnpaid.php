@@ -9,8 +9,9 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\LensRequest;
 use Laravel\Nova\Lenses\Lens;
 
-class ShopMTotal extends Lens
+class ShopUnpaid extends Lens
 {
+
     /**
      * Get the displayable name of the lens.
      *
@@ -18,7 +19,7 @@ class ShopMTotal extends Lens
      */
     public function name()
     {
-        return __('lens.mTotal');
+        return __('lens.Unpaid');
     }
 
     /**
@@ -31,10 +32,12 @@ class ShopMTotal extends Lens
     public static function query(LensRequest $request, $query)
     {
         return $request->withOrdering($request->withFilters(
-            $query->select(self::columns())
-                ->join('orders', 'shops.id', '=', 'orders.shop_id')
-                ->whereRaw('DATE_FORMAT(orders.orderDate, "%Y%m" ) = DATE_FORMAT(CURDATE(),"%Y%m")')
-                ->groupBy('shops.id')
+        $query->select(self::columns())
+            ->leftJoin('orders', 'shops.id', '=', 'orders.shop_id')
+            ->leftJoin('payments', 'shops.id', '=', 'payments.shop_id')
+            ->groupBy('shops.id')
+            ->having('unpaid','>',0)
+            ->orderByDesc('unpaid')
         ));
     }
 
@@ -48,7 +51,7 @@ class ShopMTotal extends Lens
         return [
             'shops.id',
             'shops.name',
-            DB::raw('sum(orders.price * orders.quantity) as total_price'),
+            DB::raw('COALESCE(sum(orders.price * orders.quantity),0) - COALESCE(sum(payments.amount),0) as unpaid'),
         ];
     }
 
@@ -62,16 +65,8 @@ class ShopMTotal extends Lens
     {
         return [
             ID::make('ID', 'id')->sortable(),
-            Text::make(__('shop.name'),'name'),
-            Text::make(__('shop.total_price'),'total_price'),
-            Text::make(__('shop.date'),function (){
-                return date('Y-m',time());
-            }),
-            Text::make(__('shop.unpaid'),function (){
-                $total = DB::table('orders')->select(DB::raw("sum(price * quantity) as total_price"))->where('shop_id',$this->id)->get()->toArray()[0]->total_price;
-                $payment = DB::table('payments')->select(DB::raw("sum(amount) as total_amount"))->where('shop_id',$this->id)->get()->toArray()[0]->total_amount;
-                return $total - $payment;
-            })
+            ID::make('商店名', 'name')->sortable(),
+            ID::make('未付款', 'unpaid'),
         ];
     }
 
@@ -115,6 +110,6 @@ class ShopMTotal extends Lens
      */
     public function uriKey()
     {
-        return 'shop-m-total';
+        return 'shop-unpaid';
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Nova\Lenses\ShopMTotal;
+use App\Nova\Lenses\ShopUnpaid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\BelongsTo;
@@ -156,7 +157,8 @@ class Shop extends Resource
     public function lenses(Request $request)
     {
         return [
-            new ShopMTotal()
+            new ShopMTotal(),
+            new ShopUnpaid()
         ];
     }
 
