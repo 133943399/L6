@@ -65,8 +65,13 @@ class ShopUnpaid extends Lens
     {
         return [
             ID::make('ID', 'id')->sortable(),
-            ID::make('商店名', 'name')->sortable(),
-            ID::make('未付款', 'unpaid'),
+            Text::make(__('shop.addr'),'addr')
+                ->sortable(),
+
+            Text::make(__('shop.name'),'name')
+                ->sortable(),
+
+            ID::make(__('lens.unpaid'), 'unpaid'),
         ];
     }
 
