@@ -47,6 +47,7 @@ class ShopMTotal extends Lens
     {
         return [
             'shops.id',
+            'shops.addr',
             'shops.name',
             DB::raw('sum(orders.price * orders.quantity) as total_price'),
         ];
@@ -62,11 +63,19 @@ class ShopMTotal extends Lens
     {
         return [
             ID::make('ID', 'id')->sortable(),
-            Text::make(__('shop.name'),'name'),
+
+            Text::make(__('shop.addr'),'addr')
+                ->sortable(),
+
+            Text::make(__('shop.name'),'name')
+                ->sortable(),
+
             Text::make(__('shop.total_price'),'total_price'),
+
             Text::make(__('shop.date'),function (){
                 return date('Y-m',time());
             }),
+
             Text::make(__('shop.unpaid'),function (){
                 $total = DB::table('orders')->select(DB::raw("sum(price * quantity) as total_price"))->where('shop_id',$this->id)->get()->toArray()[0]->total_price;
                 $payment = DB::table('payments')->select(DB::raw("sum(amount) as total_amount"))->where('shop_id',$this->id)->get()->toArray()[0]->total_amount;

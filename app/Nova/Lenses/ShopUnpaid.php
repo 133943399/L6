@@ -50,6 +50,7 @@ class ShopUnpaid extends Lens
     {
         return [
             'shops.id',
+            'shops.addr',
             'shops.name',
             DB::raw('COALESCE(sum(orders.price * orders.quantity),0) - COALESCE(sum(payments.amount),0) as unpaid'),
         ];
