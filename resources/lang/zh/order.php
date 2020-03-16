@@ -7,7 +7,7 @@ return [
     'old_total' => '建议零售价',
     'now_total' => '实付金额',
     'price' => '单价',
-    'perDay' => '按天统计',
-    'PerPlan' => '货品统计',
+    'perDay' => '订货统计(订单数量)',
+    'PerPlan' => '产品数量统计',
 
 ];

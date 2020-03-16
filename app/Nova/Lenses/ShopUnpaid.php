@@ -19,7 +19,7 @@ class ShopUnpaid extends Lens
      */
     public function name()
     {
-        return __('lens.Unpaid');
+        return __('lens.unpaid');
     }
 
     /**
@@ -33,11 +33,8 @@ class ShopUnpaid extends Lens
     {
         return $request->withOrdering($request->withFilters(
         $query->select(self::columns())
-            ->leftJoin('orders', 'shops.id', '=', 'orders.shop_id')
-            ->leftJoin('payments', 'shops.id', '=', 'payments.shop_id')
-            ->groupBy('shops.id')
-            ->having('unpaid','>',0)
-            ->orderByDesc('unpaid')
+            ->rightJoinSub('select shop_id,sum(price * quantity) as total from `orders` group by `shop_id` ', 'orders', 'shops.id', '=', 'orders.shop_id')
+            ->rightJoinSub('select shop_id,sum(amount) as pay from `payments` group by `shop_id` ', 'payments', 'shops.id', '=', 'payments.shop_id')
         ));
     }
 
@@ -49,10 +46,11 @@ class ShopUnpaid extends Lens
     protected static function columns()
     {
         return [
+            'orders.total',
+            'payments.pay',
             'shops.id',
             'shops.addr',
             'shops.name',
-            DB::raw('COALESCE(sum(orders.price * orders.quantity),0) - COALESCE(sum(payments.amount),0) as unpaid'),
         ];
     }
 
@@ -72,7 +70,12 @@ class ShopUnpaid extends Lens
             Text::make(__('shop.name'),'name')
                 ->sortable(),
 
-            ID::make(__('lens.unpaid'), 'unpaid'),
+//            Text::make(__('lens.total'), 'total'),
+//            Text::make(__('lens.pay'), 'pay'),
+
+            Text::make(__('lens.unpaid'), function (){
+                return $this->total - $this->pay;
+            }),
         ];
     }
 

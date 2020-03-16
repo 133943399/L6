@@ -4,6 +4,8 @@ namespace App\Nova\Lenses;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Laravel\Nova\Fields\Date;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\LensRequest;
@@ -32,8 +34,8 @@ class OrderMTotal extends Lens
     {
         return $request->withOrdering($request->withFilters(
             $query->select(self::columns())
-                ->whereRaw('DATE_FORMAT(orderDate, "%Y%m" ) = DATE_FORMAT(CURDATE(),"%Y%m")')
-                ->groupBy('id')
+//                ->whereRaw('DATE_FORMAT(orderDate, "%Y%m" ) = DATE_FORMAT(CURDATE(),"%Y%m")')
+                ->groupBy('months')
         ));
     }
 
@@ -45,7 +47,7 @@ class OrderMTotal extends Lens
     protected static function columns()
     {
         return [
-            'id',
+            DB::raw('DATE_FORMAT(orderDate, "%Y-%m" ) as months'),
             DB::raw('sum(price * quantity) as total_price'),
         ];
     }
@@ -59,7 +61,7 @@ class OrderMTotal extends Lens
     public function fields(Request $request)
     {
         return [
-            ID::make('ID', 'id')->sortable(),
+            Text::make('日期','months'),
             Text::make(__('lens.total_price'),'total_price'),
         ];
     }

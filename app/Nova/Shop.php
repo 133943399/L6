@@ -10,7 +10,6 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 
 class Shop extends Resource
@@ -36,7 +35,7 @@ class Shop extends Resource
      */
     public static $search = [
         'name',
-        'contact_name',
+//        'contact_name',
         'telephone',
         'addr',
     ];
