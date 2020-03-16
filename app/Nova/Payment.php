@@ -61,6 +61,8 @@ class Payment extends Resource
             Number::make(__('payment.amount'),'amount')->step(0.01)->rules('required'),
 
             Date::make(__('payment.paymentDate'),'paymentDate')->rules('required'),
+
+            Text::make(__('payment.remark'),'remark'),
         ];
     }
 
