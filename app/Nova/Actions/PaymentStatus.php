@@ -38,7 +38,7 @@ class PaymentStatus extends Action
     public function fields()
     {
         return [
-            Select::make(__('order.status'),'stauts')
+            Select::make(__('order.status'),'status')
                 ->options([
                     '0' => '未付款',
                     '1' => '付款',
