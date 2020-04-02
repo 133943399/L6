@@ -8,8 +8,8 @@ use App\Nova\Metrics\OrderPerDay;
 use App\Nova\Metrics\OrdersPerPlan;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
@@ -65,7 +65,7 @@ class Order extends Resource
 
             BelongsTo::make(__('product.label'), 'Product', Product::class),
 
-            Number::make(__('order.price'),'price')->step(0.01),
+//            Number::make(__('order.price'),'price')->step(0.01),
 
             Number::make('数量','quantity'),
 
@@ -77,6 +77,8 @@ class Order extends Resource
             Number::make(__('order.now_total'),function (){
                 return $this->quantity * $this->price;
             }),
+
+            Boolean::make(__('order.status'),'status'),
 
             Date::make(__('order.orderDate'),'orderDate')->rules('required'),
         ];

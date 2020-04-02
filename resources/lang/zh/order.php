@@ -9,5 +9,6 @@ return [
     'price' => '单价',
     'perDay' => '订货统计(订单数量)',
     'PerPlan' => '产品数量统计',
+    'status' => '付款状态',
 
 ];

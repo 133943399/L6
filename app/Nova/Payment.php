@@ -65,8 +65,6 @@ class Payment extends Resource
             Date::make(__('payment.paymentDate'),'paymentDate')->rules('required'),
 
             Text::make(__('payment.remark'),'remark'),
-
-            Boolean::make(__('payment.status'),'status'),
         ];
     }
 
@@ -111,8 +109,6 @@ class Payment extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-            new PaymentStatus(),
-        ];
+        return [];
     }
 }
