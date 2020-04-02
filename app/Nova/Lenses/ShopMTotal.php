@@ -64,11 +64,9 @@ class ShopMTotal extends Lens
         return [
             ID::make('ID', 'id')->sortable(),
 
-            Text::make(__('shop.addr'),'addr')
-                ->sortable(),
+            Text::make(__('shop.addr'),'addr'),
 
-            Text::make(__('shop.name'),'name')
-                ->sortable(),
+            Text::make(__('shop.name'),'name'),
 
             Text::make(__('shop.total_price'),'total_price'),
 

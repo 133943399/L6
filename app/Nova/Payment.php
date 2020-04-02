@@ -2,8 +2,10 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\PaymentStatus;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
@@ -63,6 +65,8 @@ class Payment extends Resource
             Date::make(__('payment.paymentDate'),'paymentDate')->rules('required'),
 
             Text::make(__('payment.remark'),'remark'),
+
+            Boolean::make(__('payment.status'),'status'),
         ];
     }
 
@@ -107,6 +111,8 @@ class Payment extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new PaymentStatus(),
+        ];
     }
 }

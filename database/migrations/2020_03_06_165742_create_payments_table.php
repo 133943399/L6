@@ -18,6 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->bigInteger('shop_id',false,true)->comment('商铺id');
             $table->decimal('amount')->comment('付款金额');
             $table->timestamp('paymentDate')->nullable()->comment('付款日期');
+            $table->enum('status',[0,1])->default(0)->comment('付款状态');
             $table->string('remark')->nullable()->comment('备注');
             $table->timestamps();
         });
