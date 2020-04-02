@@ -33,9 +33,9 @@ class ShopUnpaid extends Lens
     {
         return $request->withOrdering($request->withFilters(
         $query->select(self::columns())
-            ->rightJoinSub('select shop_id,sum(price * quantity) as total from `orders` group by `shop_id` ', 'orders', 'shops.id', '=', 'orders.shop_id')
-            ->rightJoinSub('select shop_id,sum(amount) as pay from `payments` group by `shop_id` ', 'payments', 'shops.id', '=', 'payments.shop_id')
-            ->whereRaw('orders.total - payments.pay > 0')
+            ->leftJoinSub('select shop_id,sum(price * quantity) as total from `orders` group by `shop_id` ', 'orders', 'shops.id', '=', 'orders.shop_id')
+            ->leftJoinSub('select shop_id,sum(amount) as pay from `payments` group by `shop_id` ', 'payments', 'shops.id', '=', 'payments.shop_id')
+            ->whereRaw('(orders.total -  IFNULL(payments.pay,0)) > 0')
             ->orderBy('unpaid','desc')
 
         ));
@@ -54,7 +54,7 @@ class ShopUnpaid extends Lens
             'shops.id',
             'shops.addr',
             'shops.name',
-            DB::raw('orders.total - payments.pay as unpaid')
+            DB::raw('orders.total - IFNULL(payments.pay,0) as unpaid')
         ];
     }
 
