@@ -65,7 +65,7 @@ class Order extends Resource
 
             BelongsTo::make(__('product.label'), 'Product', Product::class),
 
-//            Number::make(__('order.price'),'price')->step(0.01),
+            Number::make(__('order.price'),'price')->step(0.01),
 
             Number::make('数量','quantity'),
 
