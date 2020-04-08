@@ -69,10 +69,10 @@ class Order extends Resource
 
             Number::make('数量','quantity'),
 
-            Text::make(__('order.old_total'),function (){
-                $total = $this->quantity * $this->product->price;
-                return $total;
-            }),
+//            Text::make(__('order.old_total'),function (){
+//                $total = $this->quantity * $this->product->price;
+//                return $total;
+//            }),
 
             Number::make(__('order.now_total'),function (){
                 return $this->quantity * $this->price;
