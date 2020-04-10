@@ -8,13 +8,12 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Fields\ActionFields;
-use Laravel\Nova\Fields\Select;
 
-class PaymentStatus extends Action
+class SumPrice extends Action
 {
     use InteractsWithQueue, Queueable;
 
-    public $name = '付款状态';
+    public $name = '统计价格';
 
     /**
      * Perform the action on the given models.
@@ -25,10 +24,11 @@ class PaymentStatus extends Action
      */
     public function handle(ActionFields $fields, Collection $models)
     {
+        $sumPrice = 0;
         foreach ($models as $model){
-            $model->status = $fields->status;
-            $model->save();
+            $sumPrice += $model->quantity * $model->price;
         }
+        return Action::message("价格总计 : ".$sumPrice);
     }
 
     /**
@@ -38,12 +38,6 @@ class PaymentStatus extends Action
      */
     public function fields()
     {
-        return [
-            Select::make(__('order.status'),'status')
-                ->options([
-                    '0' => '未付款',
-                    '1' => '付款',
-                ]),
-        ];
+        return [];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Nova;
 
 use App\Nova\Actions\PaymentStatus;
+use App\Nova\Actions\SumPrice;
 use App\Nova\Lenses\OrderMTotal;
 use App\Nova\Metrics\OrderPerDay;
 use App\Nova\Metrics\OrdersPerPlan;
@@ -132,6 +133,7 @@ class Order extends Resource
     {
         return [
             new PaymentStatus(),
+            new SumPrice(),
         ];
     }
 }
