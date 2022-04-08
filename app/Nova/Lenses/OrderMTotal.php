@@ -2,13 +2,13 @@
 
 namespace App\Nova\Lenses;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\LensRequest;
+use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Lenses\Lens;
 
 class OrderMTotal extends Lens
@@ -58,7 +58,7 @@ class OrderMTotal extends Lens
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
-    public function fields(Request $request)
+    public function fields(NovaRequest $request)
     {
         return [
             Text::make('日期','months'),
@@ -69,10 +69,10 @@ class OrderMTotal extends Lens
     /**
      * Get the cards available on the lens.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  NovaRequest  $request
      * @return array
      */
-    public function cards(Request $request)
+    public function cards(NovaRequest $request)
     {
         return [];
     }
@@ -80,10 +80,10 @@ class OrderMTotal extends Lens
     /**
      * Get the filters available for the lens.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  NovaRequest  $request
      * @return array
      */
-    public function filters(Request $request)
+    public function filters(NovaRequest $request)
     {
         return [];
     }
@@ -91,10 +91,10 @@ class OrderMTotal extends Lens
     /**
      * Get the actions available on the lens.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  NovaRequest  $request
      * @return array
      */
-    public function actions(Request $request)
+    public function actions(NovaRequest $request)
     {
         return parent::actions($request);
     }

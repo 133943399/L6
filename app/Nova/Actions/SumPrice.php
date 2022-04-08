@@ -36,7 +36,7 @@ class SumPrice extends Action
      *
      * @return array
      */
-    public function fields()
+    public function fields($novaRequest)
     {
         return [];
     }

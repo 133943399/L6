@@ -2,7 +2,7 @@
 
 namespace App\Nova\Metrics;
 
-use App\order;
+use App\Models\Order;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Metrics\Trend;
 
@@ -49,10 +49,10 @@ class OrderPerDay extends Trend
      *
      * @return  \DateTimeInterface|\DateInterval|float|int
      */
-    public function cacheFor()
-    {
-        // return now()->addMinutes(5);
-    }
+    //public function cacheFor()
+    //{
+    //    // return now()->addMinutes(5);
+    //}
 
     /**
      * Get the URI key for the metric.

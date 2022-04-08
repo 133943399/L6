@@ -2,15 +2,16 @@
 
 namespace App\Nova;
 
+use App\Models\Order;
+use App\Models\Payment;
 use App\Nova\Lenses\ShopMTotal;
 use App\Nova\Lenses\ShopUnpaid;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Panel;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Shop extends Resource
 {
@@ -19,7 +20,7 @@ class Shop extends Resource
      *
      * @var string
      */
-    public static $model = 'App\Shop';
+    public static $model =  \App\Models\Shop::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -63,10 +64,10 @@ class Shop extends Resource
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  NovaRequest  $request
      * @return array
      */
-    public function fields(Request $request)
+    public function fields(NovaRequest $request)
     {
         return [
             ID::make()->sortable(),
@@ -100,13 +101,13 @@ class Shop extends Resource
 
     public function orderFields(){
         return [
-            HasMany::make(__('order.label'), 'Order', Order::class)
+            HasMany::make(__('order.label'), 'Order', \App\Nova\Order::class)
         ];
     }
 
     public function paymentFields(){
         return [
-            HasMany::make(__('payment.label'), 'Payment', Payment::class)
+            HasMany::make(__('payment.label'), 'Payment', \App\Nova\Payment::class)
         ];
     }
 
@@ -128,10 +129,10 @@ class Shop extends Resource
     /**
      * Get the cards available for the request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  NovaRequest  $request
      * @return array
      */
-    public function cards(Request $request)
+    public function cards(NovaRequest $request)
     {
         return [];
     }
@@ -139,10 +140,10 @@ class Shop extends Resource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  NovaRequest  $request
      * @return array
      */
-    public function filters(Request $request)
+    public function filters(NovaRequest $request)
     {
         return [];
     }
@@ -150,10 +151,10 @@ class Shop extends Resource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  NovaRequest  $request
      * @return array
      */
-    public function lenses(Request $request)
+    public function lenses(NovaRequest $request)
     {
         return [
             new ShopMTotal(),
@@ -164,10 +165,10 @@ class Shop extends Resource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  NovaRequest  $request
      * @return array
      */
-    public function actions(Request $request)
+    public function actions(NovaRequest $request)
     {
         return [];
     }

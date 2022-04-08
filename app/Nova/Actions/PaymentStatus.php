@@ -21,7 +21,7 @@ class PaymentStatus extends Action
      *
      * @param  \Laravel\Nova\Fields\ActionFields  $fields
      * @param  \Illuminate\Support\Collection  $models
-     * @return mixed
+     * @return void
      */
     public function handle(ActionFields $fields, Collection $models)
     {
@@ -36,7 +36,7 @@ class PaymentStatus extends Action
      *
      * @return array
      */
-    public function fields()
+    public function fields($novaRequest)
     {
         return [
             Select::make(__('order.status'),'status')
