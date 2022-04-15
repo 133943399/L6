@@ -2,11 +2,23 @@
 
 namespace App\Nova\Dashboards;
 
-use Laravel\Nova\Cards\Help;
+use App\Nova\Metrics\OrderPerDay;
+use App\Nova\Metrics\OrdersPerPlan;
 use Laravel\Nova\Dashboards\Main as Dashboard;
 
 class Main extends Dashboard
 {
+
+    /**
+     * Get the displayable label of the resource.
+     *
+     * @return string
+     */
+    public function label(): string
+    {
+        return __('main.label');
+    }
+
     /**
      * Get the cards for the dashboard.
      *
@@ -15,7 +27,8 @@ class Main extends Dashboard
     public function cards()
     {
         return [
-            new Help,
+            new OrderPerDay,
+            new OrdersPerPlan,
         ];
     }
 }

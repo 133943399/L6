@@ -44,7 +44,7 @@ class Order extends Resource
      *
      * @return string
      */
-    public static function label()
+    public static function label(): string
     {
         return __('order.label');
     }
