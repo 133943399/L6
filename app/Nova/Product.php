@@ -71,6 +71,8 @@ class Product extends Resource
 
             Boolean::make(__('product.status'),'status'),
 
+            Number::make(__('product.sort'),'sort')->min(0)->max(100)->default(0),
+
             Text::make(__('product.remark'),'remark')
                 ->sortable()
                 ->rules('max:255')

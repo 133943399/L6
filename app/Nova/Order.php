@@ -12,6 +12,7 @@ use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Order extends Resource
@@ -61,6 +62,11 @@ class Order extends Resource
             ID::make()->sortable(),
 
             BelongsTo::make('配送->'.__('shop.label'), 'Shop', Shop::class)->searchable(),
+
+            // 产品自定义排序字段
+            Select::make(__('product.label'))->options(
+                (new \App\Models\Product)->orderBy('sort')->get()->pluck('name', 'id')
+            ),
 
             BelongsTo::make(__('product.label'), 'Product', Product::class),
 
