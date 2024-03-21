@@ -7,6 +7,7 @@ use App\Nova\Actions\SumPrice;
 use App\Nova\Lenses\OrderMTotal;
 use App\Nova\Metrics\OrderPerDay;
 use App\Nova\Metrics\OrdersPerPlan;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Date;
@@ -64,10 +65,13 @@ class Order extends Resource
             BelongsTo::make('配送->'.__('shop.label'), 'Shop', Shop::class)->searchable(),
 
             // 下拉列表排序
-            BelongsTo::make(__('product.label'), 'Product', Product::class)->ReorderAssociatables(["sort"]),
+            BelongsTo::make(__('product.label'), 'Product', Product::class)->dontReorderAssociatables()->relatableQueryUsing(
+                function (NovaRequest $request, Builder $query) {
+                    $query->reorder()->orderBy('products.sort');
+                }
+            ),
 
 //            Select::make(__('product.label'),'product_id')->options(\App\Models\Product::all()->pluck('name','id'))->sortable()->required(),
-
 
             Number::make(__('order.price'),'price')->step(0.01),
 
