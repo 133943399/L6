@@ -63,12 +63,11 @@ class Order extends Resource
 
             BelongsTo::make('配送->'.__('shop.label'), 'Shop', Shop::class)->searchable(),
 
-            // 产品自定义排序字段
-            Select::make(__('product.label'))->options(
-                (new \App\Models\Product)->orderBy('sort')->get()->pluck('name', 'id')
-            ),
+            // 下拉列表排序
+            BelongsTo::make(__('product.label'), 'Product', Product::class)->ReorderAssociatables(["sort"]),
 
-            BelongsTo::make(__('product.label'), 'Product', Product::class),
+//            Select::make(__('product.label'),'product_id')->options(\App\Models\Product::all()->pluck('name','id'))->sortable()->required(),
+
 
             Number::make(__('order.price'),'price')->step(0.01),
 
