@@ -52,6 +52,13 @@ class Order extends Resource
     }
 
     /**
+     * Custom priority level of the resource.
+     *
+     * @var int
+     */
+    public static $priority = 3;
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @param NovaRequest $request

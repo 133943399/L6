@@ -36,6 +36,16 @@ class User extends Resource
     ];
 
     /**
+     * 显示名称
+     *
+     * @return string
+     */
+    public static function label()
+    {
+        return __('user.label');
+    }
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request

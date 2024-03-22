@@ -45,6 +45,14 @@ class Payment extends Resource
     }
 
     /**
+     * Custom priority level of the resource.
+     *
+     * @var int
+     */
+    public static $priority = 4;
+
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @param NovaRequest $request

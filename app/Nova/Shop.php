@@ -62,6 +62,13 @@ class Shop extends Resource
     }
 
     /**
+     * Custom priority level of the resource.
+     *
+     * @var int
+     */
+    public static $priority = 1;
+
+    /**
      * Get the fields displayed by the resource.
      *
      * @param  NovaRequest  $request
