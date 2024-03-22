@@ -73,7 +73,9 @@ class Order extends Resource
 
 //            Select::make(__('product.label'),'product_id')->options(\App\Models\Product::all()->pluck('name','id'))->sortable()->required(),
 
-            Number::make(__('order.price'),'price')->step(0.01),
+            Number::make(__('order.price'),'price')->step(0.01)->displayUsing(function ($value) {
+                return $value . ' 元';
+            }),
 
             Number::make('数量','quantity'),
 

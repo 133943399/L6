@@ -57,7 +57,9 @@ class Payment extends Resource
 
             BelongsTo::make(__('shop.label'), 'Shop', Shop::class)->searchable(),
 
-            Number::make(__('payment.amount'),'amount')->step(0.01)->rules('required'),
+            Number::make(__('payment.amount'),'amount')->step(0.01)->rules('required')->displayUsing(function ($value) {
+                return $value . ' 元';
+            }),
 
             Date::make(__('payment.paymentDate'),'paymentDate')->rules('required'),
 
