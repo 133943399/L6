@@ -76,8 +76,17 @@ class ShopMTotal extends Lens
             }),
 
             Text::make(__('shop.unpaid'),function (){
-                $total = DB::table('orders')->select(DB::raw("sum(price * quantity) as total_price"))->where('shop_id',$this->id)->get()->toArray()[0]->total_price;
-                $payment = DB::table('payments')->select(DB::raw("sum(amount) as total_amount"))->where('shop_id',$this->id)->get()->toArray()[0]->total_amount;
+                $total = DB::table('orders')
+                    ->select(DB::raw("sum(price * quantity) as total_price"))
+                    ->where('shop_id',$this->id)
+                    ->whereNull('deleted_at')
+                    ->get()->toArray()[0]->total_price;
+
+                $payment = DB::table('payments')
+                    ->select(DB::raw("sum(amount) as total_amount"))
+                    ->where('shop_id',$this->id)
+                    ->whereNull('deleted_at')
+                    ->get()->toArray()[0]->total_amount;
                 return $total - $payment;
             })
         ];
