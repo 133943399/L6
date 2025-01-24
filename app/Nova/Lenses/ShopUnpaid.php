@@ -38,7 +38,6 @@ class ShopUnpaid extends Lens
             ->where(['orders.deleted_at','<>',null],['payments.deleted_at','<>',null])
             ->whereRaw('(orders.total -  IFNULL(payments.pay,0)) > 0')
             ->orderBy('unpaid','desc')
-
         ));
     }
 
@@ -55,6 +54,8 @@ class ShopUnpaid extends Lens
             'shops.id',
             'shops.addr',
             'shops.name',
+            'orders.deleted_at',
+            'payments.deleted_at',
             DB::raw('orders.total - IFNULL(payments.pay,0) as unpaid')
         ];
     }
