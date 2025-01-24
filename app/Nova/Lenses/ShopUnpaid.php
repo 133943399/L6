@@ -53,8 +53,6 @@ class ShopUnpaid extends Lens
             'shops.id',
             'shops.addr',
             'shops.name',
-            'orders.deleted_at',
-            'payments.deleted_at',
             DB::raw('orders.total - IFNULL(payments.pay,0) as unpaid')
         ];
     }
