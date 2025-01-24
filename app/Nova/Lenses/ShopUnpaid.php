@@ -33,9 +33,11 @@ class ShopUnpaid extends Lens
     {
         return $request->withOrdering($request->withFilters(
         $query->select(self::columns())
-            ->leftJoinSub('select shop_id,sum(price * quantity) as total, any_value(deleted_at) from `orders` where deleted_at is not null group by `shop_id` ', 'orders', 'shops.id', '=', 'orders.shop_id')
-            ->leftJoinSub('select shop_id,sum(amount) as pay , any_value(deleted_at) from `payments` where deleted_at is not null group by `shop_id` ', 'payments', 'shops.id', '=', 'payments.shop_id')
+            ->leftJoinSub('select shop_id,sum(price * quantity) as total, any_value(deleted_at) from `orders`  group by `shop_id` ', 'orders', 'shops.id', '=', 'orders.shop_id')
+            ->leftJoinSub('select shop_id,sum(amount) as pay , any_value(deleted_at) from `payments` group by `shop_id` ', 'payments', 'shops.id', '=', 'payments.shop_id')
             ->whereRaw('(orders.total -  IFNULL(payments.pay,0)) > 0')
+            ->whereNull('orders.deleted_at')
+            ->whereNull('payments.deleted_at')
             ->orderBy('unpaid','desc')
         ));
     }
