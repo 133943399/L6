@@ -97,7 +97,7 @@ class Order extends Resource
 
             Boolean::make(__('order.status'),'status'),
 
-            Date::make(__('order.orderDate'),'orderDate')->rules('required'),
+            Date::make(__('order.orderDate'),'orderDate')->sortable()->rules('required'),
         ];
     }
 
